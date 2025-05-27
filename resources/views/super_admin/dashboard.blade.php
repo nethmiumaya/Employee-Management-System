@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Admin Dashboard</title>
+    <title>Super Admin Dashboard</title>
 </head>
 <body>
 @include('components.navbar')
-<h1>Welcome to the Admin Dashboard!</h1>
+<h1>Welcome to the Super Admin Dashboard!</h1>
 </body>
 </html>

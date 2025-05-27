@@ -8,6 +8,12 @@ Route::get('/', function () {
 });
 
 Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/employee/dashboard', function () {
+    return view('employee.dashboard');
+})->name('employee.dashboard');
+Route::get('/super_admin/dashboard', function () {
+    return view('super_admin.dashboard');
+})->name('super_admin.dashboard');
 
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
