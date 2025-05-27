@@ -50,7 +50,7 @@ class RegistrationController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'contact_no' => 'required|string|max:15',
-            'role' => 'required|string|in:employee,admin',
+            'role' => 'required|string|in:employee,admin,super_admin',
         ]);
 
         if ($validator->fails()) {
