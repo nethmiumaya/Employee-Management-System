@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Department;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
-
 
 class DepartmentController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only(['create', 'store']);
+        $this->middleware('auth')->only(['create', 'store', 'edit', 'destroy']);
     }
 
     public function index()
