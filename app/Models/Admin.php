@@ -10,7 +10,7 @@ class Admin extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['admin_id', 'admin_name', 'employee_id'];
+    protected $fillable = ['admin_id', 'admin_name'];
 
     public function employee() {
         return $this->belongsTo(Employee::class, 'employee_id');

@@ -20,7 +20,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
 
-
+Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
+Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
 Route::resource('departments', DepartmentController::class);
 
 require __DIR__.'/auth.php';
