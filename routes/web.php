@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,5 +19,8 @@ Route::get('/super_admin/dashboard', function () {
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+
+Route::resource('departments', DepartmentController::class);
 
 require __DIR__.'/auth.php';
