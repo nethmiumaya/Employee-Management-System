@@ -3,6 +3,7 @@
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SuperAdminController;
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
@@ -22,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('departments', DepartmentController::class);
 Route::resource('admins', AdminController::class);
+Route::resource('super_admins', SuperAdminController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 
 require __DIR__.'/auth.php';
