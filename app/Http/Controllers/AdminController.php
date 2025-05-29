@@ -14,6 +14,30 @@ class AdminController extends Controller
         return view('admin.create');
     }
 
+    public function edit(Admin $admin)
+    {
+        return view('admin.edit', compact('admin'));
+    }
+    public function show(Admin $admin)
+    {
+        return view('admin.show', compact('admin'));
+    }
+
+    public function destroy(Admin $admin)
+    {
+        $admin->delete();
+        return redirect()->route('admins.index')->with('success', 'Admin deleted successfully.');
+    }
+    public function update(Request $request, Admin $admin)
+    {
+        $request->validate([
+            'admin_name' => 'required|string|max:255',
+        ]);
+
+        $admin->update($request->all());
+        return redirect()->route('admin.dashboard')->with('success', 'Admin updated successfully.');
+    }
+
     public function store(Request $request)
     {
         try {
@@ -33,6 +57,7 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('admin.dashboard');
+        $admins = Admin::all();
+        return view('components.admin', compact('admins'));
     }
 }

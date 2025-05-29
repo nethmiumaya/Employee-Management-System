@@ -8,20 +8,20 @@ Route::get('/', function () {
     return ['Laravel' => app()->version()];
 });
 
-Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-Route::get('/employee/dashboard', function () {
-    return view('employee.dashboard');
-})->name('employee.dashboard');
-Route::get('/super_admin/dashboard', function () {
-    return view('super_admin.dashboard');
-})->name('super_admin.dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
+    Route::get('/employee/dashboard', function () {
+        return view('employee.dashboard');
+    })->name('employee.dashboard');
+    Route::get('/super_admin/dashboard', function () {
+        return view('super_admin.dashboard');
+    })->name('super_admin.dashboard');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
 
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
-    ->middleware('auth')
-    ->name('logout');
-
-Route::get('/admin/create', [AdminController::class, 'create'])->name('admin.create');
-Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
 Route::resource('departments', DepartmentController::class);
+Route::resource('admins', AdminController::class);
+Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 
 require __DIR__.'/auth.php';
