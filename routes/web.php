@@ -20,17 +20,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/super_admin/dashboard', function () {
         return view('super_admin.dashboard');
     })->name('super_admin.dashboard');
+
+    Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
+    Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
+    Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+    Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
+    Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
+
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
-// routes/web.php
-
-Route::middleware('auth')->group(function () {
-    // ...other protected routes...
-
-    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-    Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
-});
+Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
+Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
 
 Route::resource('departments', DepartmentController::class);
 Route::resource('admins', AdminController::class);
