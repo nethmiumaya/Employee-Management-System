@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\EmployeeController;
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
@@ -20,6 +21,15 @@ Route::middleware('auth')->group(function () {
         return view('super_admin.dashboard');
     })->name('super_admin.dashboard');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
+
+// routes/web.php
+
+Route::middleware('auth')->group(function () {
+    // ...other protected routes...
+
+    Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
+    Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 });
 
 Route::resource('departments', DepartmentController::class);
