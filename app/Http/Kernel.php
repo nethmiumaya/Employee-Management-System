@@ -52,6 +52,7 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'super_admin' => \App\Http\Middleware\EnsureSuperAdminMiddleware::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.silent' => \App\Http\Middleware\SilentAuthMiddleware::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,

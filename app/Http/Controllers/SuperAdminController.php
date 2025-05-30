@@ -46,10 +46,17 @@ class SuperAdminController extends Controller
         return redirect()->route('super_admins.index')->with('success', 'Super Admin updated successfully!');
     }
 
-    public function destroy(SuperAdmin $superAdmin)
+    public function destroy($id)
     {
-        $superAdmin->delete();
-        return redirect()->route('super_admin.index')->with('success', 'Super Admin deleted successfully.');
+        try {
+            $superAdmin = SuperAdmin::findOrFail($id);
+            $superAdmin->delete();
+
+            return redirect()->route('super_admins.index')->with('success', 'Super Admin deleted successfully!');
+        } catch (\Exception $e) {
+            \Log::error('Error deleting Super Admin: ' . $e->getMessage());
+            return back()->withErrors('An error occurred while deleting the Super Admin.');
+        }
     }
 
     public function show(SuperAdmin $superAdmin)

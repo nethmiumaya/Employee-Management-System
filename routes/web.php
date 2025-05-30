@@ -4,6 +4,7 @@ use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\ReportController;
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];
@@ -25,5 +26,10 @@ Route::resource('departments', DepartmentController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('super_admins', SuperAdminController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
+
+Route::get('/reports/create', [ReportController::class, 'create'])->name('reports.create');
+Route::post('/reports/store', [ReportController::class, 'store'])->name('reports.store');
+
+
 
 require __DIR__.'/auth.php';
