@@ -9,8 +9,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Management System - Streamline Your Workforce</title>
-    <meta name="description" content="Professional Employee Management System for modern businesses. Manage employees, projects, payroll, and more with our comprehensive solution.">
+    <title>HRMS - Employee Management System | Streamline Your Workforce</title>
+    <meta name="description" content="Professional Employee Management System for modern businesses. Manage employees, projects, payroll, and more with our comprehensive HRMS solution.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,11 +19,11 @@
 
     <style>
         :root {
-            --primary: #3b82f6;
-            --primary-dark: #1d4ed8;
-            --primary-light: #60a5fa;
-            --secondary: #8b5cf6;
-            --accent: #06b6d4;
+            --primary: #f97316;
+            --primary-dark: #ea580c;
+            --primary-light: #fb923c;
+            --secondary: #dc2626;
+            --accent: #f59e0b;
             --success: #10b981;
             --warning: #f59e0b;
             --danger: #ef4444;
@@ -112,6 +112,15 @@
             }
         }
 
+        @keyframes shimmer {
+            0% {
+                background-position: -200px 0;
+            }
+            100% {
+                background-position: calc(200px + 100%) 0;
+            }
+        }
+
         .animate-fadeInUp {
             animation: fadeInUp 0.8s ease-out forwards;
         }
@@ -142,11 +151,11 @@
         }
 
         .gradient-secondary {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary) 100%);
         }
 
         .gradient-accent {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
         }
 
         .gradient-text {
@@ -161,19 +170,36 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.4);
         }
 
         .btn-secondary {
@@ -181,7 +207,7 @@
             color: var(--primary);
             padding: 12px 24px;
             border: 2px solid var(--primary);
-            border-radius: 8px;
+            border-radius: 12px;
             font-weight: 600;
             text-decoration: none;
             display: inline-flex;
@@ -194,6 +220,7 @@
             background: var(--primary);
             color: white;
             transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(249, 115, 22, 0.3);
         }
 
         /* Card styles */
@@ -203,7 +230,7 @@
             border-radius: 16px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
-            border: 1px solid rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.1);
             position: relative;
             overflow: hidden;
         }
@@ -220,7 +247,7 @@
 
         .feature-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(249, 115, 22, 0.15);
         }
 
         .feature-icon {
@@ -247,11 +274,12 @@
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
+            border: 1px solid rgba(249, 115, 22, 0.1);
         }
 
         .stats-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.15);
         }
 
         .stats-number {
@@ -267,17 +295,17 @@
         .navbar {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(59, 130, 246, 0.1);
+            border-bottom: 1px solid rgba(249, 115, 22, 0.1);
             transition: all 0.3s ease;
         }
 
         .navbar.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(249, 115, 22, 0.1);
         }
 
         /* Hero section */
         .hero-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 50%, #dc2626 100%);
             position: relative;
             overflow: hidden;
         }
@@ -332,6 +360,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             position: relative;
             transition: all 0.3s ease;
+            border: 1px solid rgba(249, 115, 22, 0.1);
         }
 
         .testimonial-card::before {
@@ -347,7 +376,7 @@
 
         .testimonial-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.15);
         }
 
         /* Responsive design */
@@ -411,6 +440,68 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-dark);
         }
+
+        /* HRMS Logo styling */
+        .hrms-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.05em;
+        }
+
+        /* Enhanced CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M20 20c0-11.046-8.954-20-20-20v20h20z'/%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(249, 115, 22, 0.1);
+        }
+
+        /* Enhanced hover effects */
+        .hover-lift {
+            transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Gradient border animation */
+        .gradient-border {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -422,22 +513,42 @@
                     <div class="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
                         <i class="fas fa-users text-white text-lg"></i>
                     </div>
-                    <span class="text-2xl font-bold gradient-text">EM System</span>
+                    <span class="hrms-logo">HRMS</span>
                 </div>
+
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features" class="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
-                    <a href="#benefits" class="text-gray-600 hover:text-blue-600 transition-colors">Benefits</a>
-                    <a href="#testimonials" class="text-gray-600 hover:text-blue-600 transition-colors">Testimonials</a>
-                    <a href="#contact" class="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
+                    <a href="#features" class="text-gray-600 hover:text-orange-600 transition-colors font-medium">Features</a>
+                    <a href="#benefits" class="text-gray-600 hover:text-orange-600 transition-colors font-medium">Benefits</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-orange-600 transition-colors font-medium">Testimonials</a>
+                    <a href="#contact" class="text-gray-600 hover:text-orange-600 transition-colors font-medium">Contact</a>
                 </div>
+
                 <div class="flex items-center space-x-4">
-                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">
+                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-gray-900 font-medium transition-colors hover-lift">
                         <i class="fas fa-sign-in-alt mr-2"></i>Login
                     </a>
                     <a href="{{ route('register') }}" class="btn-primary">
                         <i class="fas fa-user-plus"></i>
                         Get Started
                     </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-600 hover:text-orange-600 transition-colors">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="hidden md:hidden mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#features" class="block px-3 py-2 text-gray-600 hover:text-orange-600 transition-colors">Features</a>
+                    <a href="#benefits" class="block px-3 py-2 text-gray-600 hover:text-orange-600 transition-colors">Benefits</a>
+                    <a href="#testimonials" class="block px-3 py-2 text-gray-600 hover:text-orange-600 transition-colors">Testimonials</a>
+                    <a href="#contact" class="block px-3 py-2 text-gray-600 hover:text-orange-600 transition-colors">Contact</a>
                 </div>
             </div>
         </div>
@@ -456,8 +567,8 @@
                         Modern Employee Management
                         <span class="text-yellow-300">Made Simple</span>
                     </h1>
-                    <p class="text-xl mb-8 text-gray-200 leading-relaxed">
-                        Streamline your workforce management with our comprehensive, cloud-based solution.
+                    <p class="text-xl mb-8 text-orange-100 leading-relaxed">
+                        Streamline your workforce management with our comprehensive, cloud-based HRMS solution.
                         Manage employees, projects, payroll, and performance all in one powerful platform.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 mb-8">
@@ -465,49 +576,49 @@
                             <i class="fas fa-rocket"></i>
                             Start Free Trial
                         </a>
-                        <a href="#demo" class="btn-secondary text-lg px-8 py-4 bg-white/10 border-white text-white hover:bg-white hover:text-gray-900">
+                        <a href="#demo" class="btn-secondary text-lg px-8 py-4 bg-white/10 border-white text-white hover:bg-white hover:text-orange-600">
                             <i class="fas fa-play"></i>
                             Watch Demo
                         </a>
                     </div>
-                    <div class="flex items-center space-x-6 text-sm text-gray-300">
+                    <div class="flex items-center space-x-6 text-sm text-orange-200">
                         <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            <i class="fas fa-check-circle text-yellow-300 mr-2"></i>
                             Free 30-day trial
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            <i class="fas fa-check-circle text-yellow-300 mr-2"></i>
                             No credit card required
                         </div>
                         <div class="flex items-center">
-                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            <i class="fas fa-check-circle text-yellow-300 mr-2"></i>
                             24/7 support
                         </div>
                     </div>
                 </div>
                 <div class="animate-fadeInRight">
                     <div class="relative">
-                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 animate-float">
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 animate-float border border-white/20">
                             <div class="grid grid-cols-2 gap-4 mb-6">
-                                <div class="bg-white/20 rounded-lg p-4 text-center">
+                                <div class="bg-white/20 rounded-lg p-4 text-center backdrop-blur-sm">
                                     <div class="text-2xl font-bold text-white">1,250+</div>
-                                    <div class="text-sm text-gray-300">Active Employees</div>
+                                    <div class="text-sm text-orange-200">Active Employees</div>
                                 </div>
-                                <div class="bg-white/20 rounded-lg p-4 text-center">
+                                <div class="bg-white/20 rounded-lg p-4 text-center backdrop-blur-sm">
                                     <div class="text-2xl font-bold text-white">98%</div>
-                                    <div class="text-sm text-gray-300">Satisfaction Rate</div>
+                                    <div class="text-sm text-orange-200">Satisfaction Rate</div>
                                 </div>
-                                <div class="bg-white/20 rounded-lg p-4 text-center">
+                                <div class="bg-white/20 rounded-lg p-4 text-center backdrop-blur-sm">
                                     <div class="text-2xl font-bold text-white">45</div>
-                                    <div class="text-sm text-gray-300">Active Projects</div>
+                                    <div class="text-sm text-orange-200">Active Projects</div>
                                 </div>
-                                <div class="bg-white/20 rounded-lg p-4 text-center">
+                                <div class="bg-white/20 rounded-lg p-4 text-center backdrop-blur-sm">
                                     <div class="text-2xl font-bold text-white">24/7</div>
-                                    <div class="text-sm text-gray-300">Support</div>
+                                    <div class="text-sm text-orange-200">Support</div>
                                 </div>
                             </div>
                             <div class="text-center text-white">
-                                <i class="fas fa-chart-line text-4xl mb-4 animate-pulse-custom"></i>
+                                <i class="fas fa-chart-line text-4xl mb-4 animate-pulse-custom text-yellow-300"></i>
                                 <p class="text-lg font-semibold">Real-time Analytics Dashboard</p>
                             </div>
                         </div>
@@ -564,9 +675,9 @@
                         Comprehensive employee profiles, onboarding workflows, and performance tracking all in one place.
                     </p>
                     <ul class="text-sm text-gray-500 space-y-1">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Digital employee profiles</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Automated onboarding</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Performance reviews</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Digital employee profiles</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Automated onboarding</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Performance reviews</li>
                     </ul>
                 </div>
 
@@ -580,9 +691,9 @@
                         Create, assign, and track projects with built-in collaboration tools and progress monitoring.
                     </p>
                     <ul class="text-sm text-gray-500 space-y-1">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Task assignment</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Progress tracking</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Team collaboration</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Task assignment</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Progress tracking</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Team collaboration</li>
                     </ul>
                 </div>
 
@@ -596,9 +707,9 @@
                         Automated payroll processing, expense management, and financial reporting with tax compliance.
                     </p>
                     <ul class="text-sm text-gray-500 space-y-1">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Automated payroll</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Expense tracking</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Tax compliance</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Automated payroll</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Expense tracking</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Tax compliance</li>
                     </ul>
                 </div>
 
@@ -612,9 +723,9 @@
                         Streamlined leave requests, approval workflows, and automatic balance calculations.
                     </p>
                     <ul class="text-sm text-gray-500 space-y-1">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Leave requests</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Approval workflows</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Balance tracking</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Leave requests</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Approval workflows</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Balance tracking</li>
                     </ul>
                 </div>
 
@@ -628,9 +739,9 @@
                         Comprehensive reporting and analytics to make data-driven decisions about your workforce.
                     </p>
                     <ul class="text-sm text-gray-500 space-y-1">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Custom reports</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Real-time analytics</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Data visualization</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Custom reports</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Real-time analytics</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Data visualization</li>
                     </ul>
                 </div>
 
@@ -644,9 +755,9 @@
                         Enterprise-grade security with role-based access control and compliance management.
                     </p>
                     <ul class="text-sm text-gray-500 space-y-1">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Role-based access</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Data encryption</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Audit trails</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Role-based access</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Data encryption</li>
+                        <li><i class="fas fa-check text-orange-500 mr-2"></i>Audit trails</li>
                     </ul>
                 </div>
             </div>
@@ -659,7 +770,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div class="reveal">
                     <h2 class="text-4xl font-bold text-gray-900 mb-6">
-                        Why Choose Our EMS Platform?
+                        Why Choose Our HRMS Platform?
                     </h2>
                     <div class="space-y-6">
                         <div class="flex items-start space-x-4">
@@ -701,14 +812,14 @@
                     </div>
                 </div>
                 <div class="reveal">
-                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
+                    <div class="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 border border-orange-100">
                         <div class="grid grid-cols-2 gap-6">
                             <div class="text-center">
-                                <div class="text-3xl font-bold text-blue-600 mb-2">40%</div>
+                                <div class="text-3xl font-bold text-orange-600 mb-2">40%</div>
                                 <div class="text-sm text-gray-600">Time Saved</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-3xl font-bold text-purple-600 mb-2">60%</div>
+                                <div class="text-3xl font-bold text-red-600 mb-2">60%</div>
                                 <div class="text-sm text-gray-600">Cost Reduction</div>
                             </div>
                             <div class="text-center">
@@ -716,7 +827,7 @@
                                 <div class="text-sm text-gray-600">User Satisfaction</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-3xl font-bold text-orange-600 mb-2">24/7</div>
+                                <div class="text-3xl font-bold text-yellow-600 mb-2">24/7</div>
                                 <div class="text-sm text-gray-600">Support</div>
                             </div>
                         </div>
@@ -753,7 +864,7 @@
                         </div>
                     </div>
                     <p class="text-gray-700 italic">
-                        "This EMS has transformed how we manage our 500+ employees. The automation features alone have saved us countless hours every week."
+                        "This HRMS has transformed how we manage our 500+ employees. The automation features alone have saved us countless hours every week."
                     </p>
                     <div class="flex text-yellow-400 mt-4">
                         <i class="fas fa-star"></i>
@@ -821,7 +932,7 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div class="reveal">
-                    <div class="bg-gray-50 p-8 rounded-2xl">
+                    <div class="bg-gray-50 p-8 rounded-2xl border border-orange-100">
                         <div class="space-y-8">
                             <div class="flex items-start space-x-4">
                                 <div class="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
@@ -847,7 +958,7 @@
                                 </div>
                                 <div>
                                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Email</h3>
-                                    <p class="text-gray-600">info@emspro.com<br>support@emspro.com</p>
+                                    <p class="text-gray-600">info@hrms.com<br>support@hrms.com</p>
                                 </div>
                             </div>
                         </div>
@@ -858,19 +969,19 @@
                     <form class="space-y-6">
                         <div>
                             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
                         </div>
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
                         </div>
                         <div>
                             <label for="company" class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
-                            <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <input type="text" id="company" name="company" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all">
                         </div>
                         <div>
                             <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-transparent"></textarea>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"></textarea>
                         </div>
                         <button type="submit" class="w-full btn-primary py-3 justify-center">
                             <i class="fas fa-paper-plane mr-2"></i>
@@ -883,27 +994,27 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-20 gradient-primary text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <section class="py-20 cta-section text-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <div class="reveal">
                 <h2 class="text-4xl font-bold mb-6">
                     Ready to Transform Your HR Management?
                 </h2>
-                <p class="text-xl mb-8 max-w-3xl mx-auto text-blue-100">
-                    Join thousands of companies that have streamlined their workforce management with our platform.
+                <p class="text-xl mb-8 max-w-3xl mx-auto text-orange-100">
+                    Join thousands of companies that have streamlined their workforce management with our HRMS platform.
                     Start your free trial today and see the difference.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="{{ route('register') }}" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+                    <a href="{{ route('register') }}" class="bg-white text-orange-600 hover:bg-gray-100 px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 hover-lift">
                         <i class="fas fa-rocket mr-2"></i>
                         Start Free Trial
                     </a>
-                    <a href="#contact" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all">
+                    <a href="#contact" class="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg transition-all hover-lift">
                         <i class="fas fa-phone mr-2"></i>
                         Schedule Demo
                     </a>
                 </div>
-                <p class="text-sm text-blue-200 mt-6">
+                <p class="text-sm text-orange-200 mt-6">
                     No credit card required • 30-day free trial • Cancel anytime
                 </p>
             </div>
@@ -919,22 +1030,22 @@
                         <div class="w-10 h-10 gradient-primary rounded-lg flex items-center justify-center">
                             <i class="fas fa-users text-white text-lg"></i>
                         </div>
-                        <span class="text-2xl font-bold">EM System</span>
+                        <span class="text-2xl font-bold">HRMS</span>
                     </div>
                     <p class="text-gray-400 mb-6">
                         The most comprehensive employee management solution for modern businesses.
                     </p>
                     <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
                             <i class="fab fa-facebook-f text-lg"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
                             <i class="fab fa-twitter text-lg"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
                             <i class="fab fa-linkedin-in text-lg"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
                             <i class="fab fa-instagram text-lg"></i>
                         </a>
                     </div>
@@ -943,33 +1054,33 @@
                 <div>
                     <h3 class="text-lg font-semibold mb-6">Product</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrations</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Security</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Integrations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">API</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Security</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-6">Company</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Partners</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h3 class="text-lg font-semibold mb-6">Support</h3>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Documentation</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">System Status</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Community</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">System Status</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">Community</a></li>
                     </ul>
                 </div>
             </div>
@@ -978,23 +1089,29 @@
 
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <p class="text-gray-400 text-sm mb-4 md:mb-0">
-                    &copy; {{ date('Y') }} EM System. All rights reserved.
+                    &copy; {{ date('Y') }} HRMS. All rights reserved.
                 </p>
                 <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cookie Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-orange-400 text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-orange-400 text-sm transition-colors">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-orange-400 text-sm transition-colors">Cookie Policy</a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-6 right-6 bg-blue-600 text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:bg-blue-700 z-50">
+    <button id="backToTop" class="fixed bottom-6 right-6 gradient-primary text-white p-3 rounded-full shadow-lg opacity-0 invisible transition-all duration-300 hover:shadow-xl z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1092,16 +1209,6 @@
             counterObserver.observe(statsSection);
         }
 
-        // Mobile menu toggle (if needed)
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        if (mobileMenuButton && mobileMenu) {
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
         // Loading animation for buttons
         document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
             button.addEventListener('click', function(e) {
@@ -1121,7 +1228,7 @@
         <div class="fixed bottom-4 left-4 z-50">
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
-                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors shadow-lg">
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors shadow-lg hover-lift">
                     <i class="fas fa-sign-out-alt mr-2"></i>
                     Logout
                 </button>
