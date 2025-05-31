@@ -6,11 +6,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
+// Guest route - Welcome page
 Route::get('/', function () {
-    return ['Laravel' => app()->version()];
-});
+    return view('dashboard');
+})->middleware('guest')->name('welcome');
 
+// Authentication required routes
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
@@ -30,6 +33,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/employees/{employee}', [EmployeeController::class, 'destroy'])->name('employees.destroy');
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    // Redirect authenticated users to their respective dashboards
+    Route::get('/dashboard', function () {
+        $user = auth()->check() ? auth()->user() : null;
+        if ($user && $user->role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($user && $user->role === 'super_admin') {
+            return redirect()->route('super_admin.dashboard');
+        }
+        return redirect()->route('employee.dashboard');
+    })->name('dashboard');
 });
 
 Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
