@@ -58,9 +58,9 @@
         .login-card {
             background: white;
             border-radius: 24px;
-            padding: 2rem 2rem;  /* reduced from 3rem 2.5rem */
+            padding: 2rem 2rem;
             width: 100%;
-            max-width: 420px;
+            max-width: 480px;  /* increased from 420px */
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(249, 115, 22, 0.1);
             position: relative;
