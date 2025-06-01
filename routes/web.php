@@ -44,6 +44,8 @@ Route::middleware('auth')->group(function () {
         }
         return redirect()->route('employee.dashboard');
     })->name('dashboard');
+
+    Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
 });
 
 Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
