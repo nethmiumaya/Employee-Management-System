@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -57,7 +58,42 @@ class AdminController extends Controller
 
     public function index()
     {
-        $admins = Admin::all();
-        return view('components.admin', compact('admins'));
+        // Initialize dashboard statistics with default values
+        $totalEmployees = 0;    // TODO: Implement actual employee count
+        $activeProjects = 0;    // TODO: Implement actual project count
+        $pendingLeaves = 0;     // TODO: Implement actual pending leaves count
+        $thisMonthJoinings = 0; // TODO: Implement actual new joinings count
+
+        return view('admin.dashboard', [
+            'totalEmployees' => $totalEmployees,
+            'activeProjects' => $activeProjects,
+            'pendingLeaves' => $pendingLeaves,
+            'thisMonthJoinings' => $thisMonthJoinings
+        ]);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+            'current_password' => 'required_with:new_password',
+            'new_password' => 'nullable|min:8|confirmed',
+        ]);
+
+        if ($request->filled('current_password')) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+            }
+            $user->password = Hash::make($request->new_password);
+        }
+
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully!');
     }
 }
