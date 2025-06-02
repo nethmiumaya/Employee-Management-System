@@ -11,7 +11,7 @@
     <p><strong>Department ID:</strong> {{ $employee->department_id }}</p>
     <p><strong>Admin ID:</strong> {{ $employee->admin_id }}</p>
     <p><strong>Paid Status:</strong> {{ $employee->paid_status }}</p>
-    <p><strong>Team ID:</strong> {{ $employee->team_id }}</p>
+
     <p><strong>Role:</strong> {{ $employee->role }}</p>
     <a href="{{ route('employees.edit', $employee->employee_id) }}" class="btn btn-primary">Edit</a>
     <a href="{{ route('employees.index') }}" class="btn btn-secondary">Back to List</a>
