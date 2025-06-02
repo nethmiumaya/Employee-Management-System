@@ -7,6 +7,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\TeamController;
 
 // Guest route - Welcome page
 Route::get('/', function () {
@@ -55,6 +56,8 @@ Route::resource('departments', DepartmentController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('super_admins', SuperAdminController::class);
 Route::resource('reports', ReportController::class);
+Route::resource('teams', TeamController::class);
+
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 
 require __DIR__.'/auth.php';
