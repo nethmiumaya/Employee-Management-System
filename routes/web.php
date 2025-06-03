@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LeaveController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\TeamController;
-
+use App\Http\Controllers\ProjectController;
 // Guest route - Welcome page
 Route::get('/', function () {
     return view('dashboard');
@@ -57,7 +58,8 @@ Route::resource('admins', AdminController::class);
 Route::resource('super_admins', SuperAdminController::class);
 Route::resource('reports', ReportController::class);
 Route::resource('teams', TeamController::class);
-
+Route::resource('projects', ProjectController::class);
+Route::resource('leaves', LeaveController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 
 require __DIR__.'/auth.php';
