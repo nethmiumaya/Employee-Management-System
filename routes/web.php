@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
@@ -62,6 +63,7 @@ Route::resource('reports', ReportController::class);
 Route::resource('teams', TeamController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('leaves', LeaveController::class);
+Route::resource('announcements', AnnouncementController::class);
 
 Route::resource('documents', DocumentController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');

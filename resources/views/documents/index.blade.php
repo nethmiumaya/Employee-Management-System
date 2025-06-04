@@ -9,7 +9,7 @@
         <tr>
             <th>ID</th>
             <th>Employee</th>
-            <th>Path</th>
+
             <th>Version</th>
             <th>Review Date</th>
             <th>Permission</th>
@@ -22,7 +22,6 @@
         <tr>
             <td>{{ $document->document_id }}</td>
             <td>{{ $document->employee->employee_name ?? 'N/A' }}</td>
-            <td>{{ $document->doc_path }}</td>
             <td>{{ $document->version }}</td>
             <td>{{ $document->review_date }}</td>
             <td>{{ $document->access_permission }}</td>
