@@ -1,3 +1,7 @@
+@php
+use Illuminate\Support\Facades\Storage;
+@endphp
+
 @extends('layouts.app')
 
 @section('content')
@@ -11,6 +15,11 @@
     <p><strong>Access Permission:</strong> {{ $document->access_permission }}</p>
     <p><strong>Project:</strong> {{ $document->project->project_name ?? 'N/A' }}</p>
 
+    @if($document->doc_path)<a href="{{ Storage::url($document->doc_path) }}" download>Download</a>
+
+    @endif
+
     <a href="{{ route('documents.index') }}" class="btn btn-secondary">Back to List</a>
 </div>
+
 @endsection
