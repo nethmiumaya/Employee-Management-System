@@ -10,6 +10,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\DocumentController;
+
 // Guest route - Welcome page
 Route::get('/', function () {
     return view('dashboard');
@@ -60,6 +62,8 @@ Route::resource('reports', ReportController::class);
 Route::resource('teams', TeamController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('leaves', LeaveController::class);
+
+Route::resource('documents', DocumentController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 
 require __DIR__.'/auth.php';
