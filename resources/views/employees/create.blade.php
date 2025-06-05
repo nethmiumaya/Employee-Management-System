@@ -13,7 +13,6 @@
         <input type="text" name="department_id" placeholder="Department ID">
         <input type="text" name="admin_id" placeholder="Admin ID">
         <input type="text" name="paid_status" placeholder="Paid Status" required>
-        <input type="text" name="team_id" placeholder="Team ID">
         <input type="text" name="role" placeholder="Role" required>
         <button type="submit" class="btn btn-primary">Create</button>
     </form>
