@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 
@@ -15,7 +17,9 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view('employees.create');
+        $departments = Department::all();
+        $admins = Admin::all();
+        return view('employees.create', compact('departments', 'admins'));
     }
 
     public function store(Request $request)
@@ -45,7 +49,9 @@ class EmployeeController extends Controller
     public function edit($employee_id)
     {
         $employee = Employee::findOrFail($employee_id);
-        return view('employees.edit', compact('employee'));
+        $departments = Department::all();
+        $admins = Admin::all();
+        return view('employees.edit', compact('employee', 'departments', 'admins'));
     }
 
     public function update(Request $request, $employee_id)

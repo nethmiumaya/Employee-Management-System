@@ -15,10 +15,22 @@ class AnnouncementController extends Controller
     /**
      * Display a listing of the resource.
      */
+    // In index()
     public function index()
     {
-        $announcements = Announcement::all();
+        $announcements = Announcement::with(['departments', 'teams'])->get();
         return view('announcements.index', compact('announcements'));
+    }
+
+// In show()
+    /**
+     * Display the specified resource.
+     */
+
+    public function show($id)
+    {
+        $announcement = Announcement::with(['departments', 'teams'])->findOrFail($id);
+        return view('announcements.show', compact('announcement'));
     }
 
     /**
@@ -99,14 +111,7 @@ class AnnouncementController extends Controller
         return redirect()->route('announcements.index')->with('success', 'Announcement updated successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show($id)
-    {
-        $announcement = Announcement::findOrFail($id);
-        return view('announcements.show', compact('announcement'));
-    }
+
 
     /**
      * Show the form for editing the specified resource.

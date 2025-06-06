@@ -12,10 +12,7 @@ class Announcement extends Model
 
     protected $fillable = ['announcement_id', 'content', 'date', 'target_team_id', 'department_id'];
 
-    public function departments()
-    {
-        return $this->belongsToMany(Department::class, 'dep_announce_details', 'announcement_id', 'department_id');
-    }
+
     public function announcements()
     {
         return $this->belongsToMany(Announcement::class, 'dep_announce_details', 'department_id', 'announcement_id');
@@ -30,5 +27,14 @@ class Announcement extends Model
         return $this->belongsTo(Department::class, 'department_id');
     }
 
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'dep_announce_details', 'announcement_id', 'department_id');
+    }
+
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'team_announce_details', 'announcement_id', 'team_id');
+    }
 }
 
