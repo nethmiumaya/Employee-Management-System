@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Report;
+use App\Models\SuperAdmin;
 
 class ReportController extends Controller
 {
@@ -13,9 +14,27 @@ class ReportController extends Controller
         return view('reports.index', compact('reports'));
     }
 
+
+
+
+    // At the top
+
+
+// In create()
+    // At the top
+
+
     public function create()
     {
-        return view('reports.create');
+        $superAdmins = SuperAdmin::all();
+        return view('reports.create', compact('superAdmins'));
+    }
+
+// In edit()
+    public function edit(Report $report)
+    {
+        $superAdmins = SuperAdmin::all();
+        return view('reports.edit', compact('report', 'superAdmins'));
     }
 
     public function store(Request $request)
@@ -31,10 +50,7 @@ class ReportController extends Controller
         return redirect()->route('reports.index')->with('success', 'Report created successfully!');
     }
 
-    public function edit(Report $report)
-    {
-        return view('reports.edit', compact('report'));
-    }
+
 
     public function update(Request $request, Report $report)
     {
