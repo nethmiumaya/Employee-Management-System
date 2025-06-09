@@ -40,6 +40,9 @@ class Employee extends Model
     {
         return $this->belongsToMany(Announcement::class, 'employee_announcement_details', 'employee_id', 'announcement_id');
     }
-
+    public function notifications()
+    {
+        return $this->belongsToMany(Notification::class, 'employee_notifications', 'employee_id', 'notifi_id', 'employee_id', 'notifi_id');
+    }
 }
 
