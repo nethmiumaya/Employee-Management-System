@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Team;
 use App\Models\Employee;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -29,16 +29,23 @@ class TeamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // In TeamController.php
     public function store(Request $request)
     {
         $request->validate([
             'team_id' => 'required|unique:teams,team_id',
             'team_name' => 'required|string|max:255',
-            'employee_id' => 'nullable|exists:employees,employee_id',
+            'employee_ids' => 'nullable|array',
+            'employee_ids.*' => 'exists:employees,employee_id',
         ]);
 
-        Team::create($request->all());
-        return redirect()->route('teams.index')->with('success', 'Team created successfully.');
+        $team = Team::create($request->only(['team_id', 'team_name']));
+
+        if ($request->has('employee_ids')) {
+            $team->employees()->sync($request->employee_ids);
+        }
+
+        return redirect()->route('teams.index')->with('success', 'Team created and employees assigned successfully.');
     }
 
     /**
@@ -75,6 +82,29 @@ class TeamController extends Controller
         $team->update($request->all());
         return redirect()->route('teams.index')->with('success', 'Team updated successfully.');
     }
+    public function assignEmployeesForm($team_id)
+    {
+        $team = Team::findOrFail($team_id);
+        $employees = Employee::all();
+        return view('teams.assign_employees', compact('team', 'employees'));
+    }
+
+
+    public function assignEmployees(Request $request, $team_id)
+    {
+        $request->validate([
+            'employee_ids' => 'required|array',
+            'employee_ids.*' => 'exists:employees,employee_id',
+        ]);
+
+        DB::transaction(function () use ($request, $team_id) {
+            $team = Team::findOrFail($team_id);
+            $team->employees()->sync($request->employee_ids);
+        });
+
+        return redirect()->route('teams.show', $team_id)->with('success', 'Employees assigned successfully.');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -85,4 +115,5 @@ class TeamController extends Controller
         $team->delete();
         return redirect()->route('teams.index')->with('success', 'Team deleted successfully.');
     }
+
 }

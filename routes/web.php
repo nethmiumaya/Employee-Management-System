@@ -4,6 +4,7 @@ use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LeaveController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\ReportController;
@@ -56,6 +57,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
 Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
 
+Route::post('/notifications', [NotificationController::class, 'store'])->name('notifications.store');
+Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+
 Route::resource('departments', DepartmentController::class);
 Route::resource('admins', AdminController::class);
 Route::resource('super_admins', SuperAdminController::class);
@@ -64,6 +68,9 @@ Route::resource('teams', TeamController::class);
 Route::resource('projects', ProjectController::class);
 Route::resource('leaves', LeaveController::class);
 Route::resource('announcements', AnnouncementController::class);
+
+Route::get('teams/{team}/assign-employees', [TeamController::class, 'assignEmployeesForm'])->name('teams.assignEmployeesForm');
+Route::post('teams/{team}/assign-employees', [TeamController::class, 'assignEmployees'])->name('teams.assignEmployees');
 
 Route::resource('documents', DocumentController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');

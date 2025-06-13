@@ -10,8 +10,8 @@
             <th>ID</th>
             <th>Content</th>
             <th>Date</th>
-            <th>Target Team</th>
-            <th>Department</th>
+<!--            <th>Target Team</th>-->
+<!--            <th>Department</th>-->
             <th>Actions</th>
         </tr>
         </thead>
@@ -21,8 +21,20 @@
             <td>{{ $announcement->announcement_id }}</td>
             <td>{{ Str::limit($announcement->content, 30) }}</td>
             <td>{{ $announcement->date }}</td>
-            <td>{{ $announcement->target_team_id ?? 'N/A' }}</td>
-            <td>{{ $announcement->department_id ?? 'N/A' }}</td>
+<!--            <td>-->
+<!--                @if($announcement->teams->count())-->
+<!--                {{ $announcement->teams->pluck('name')->join(', ') }}-->
+<!--                @else-->
+<!--                N/A-->
+<!--                @endif-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                @if($announcement->departments->count())-->
+<!--                {{ $announcement->departments->pluck('name')->join(', ') }}-->
+<!--                @else-->
+<!--                N/A-->
+<!--                @endif-->
+<!--            </td>-->
             <td>
                 <a href="{{ route('announcements.edit', $announcement->announcement_id) }}" class="btn btn-warning">Edit</a>
                 <form action="{{ route('announcements.destroy', $announcement->announcement_id) }}" method="POST" style="display:inline;">

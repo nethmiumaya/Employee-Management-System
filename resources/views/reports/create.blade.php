@@ -14,8 +14,13 @@
             <input type="text" class="form-control" id="report_name" name="report_name" required>
         </div>
         <div class="mb-3">
-            <label for="super_admin_id" class="form-label">Super Admin ID</label>
-            <input type="text" class="form-control" id="super_admin_id" name="super_admin_id" required>
+            <label for="super_admin_id" class="form-label">Super Admin</label>
+            <select class="form-control" id="super_admin_id" name="super_admin_id" required>
+                <option value="">Select Super Admin</option>
+                @foreach($superAdmins as $admin)
+                <option value="{{ $admin->super_admin_id }}">{{ $admin->super_admin_name }}</option>
+                @endforeach
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Create Report</button>
     </form>

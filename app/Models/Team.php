@@ -10,7 +10,7 @@ class Team extends Model
     public $incrementing = false;
     protected $keyType = 'string';
 
-    protected $fillable = ['team_id', 'team_name', 'employee_id'];
+    protected $fillable = ['team_id', 'team_name'];
 
     public function employee()
     {
@@ -21,5 +21,11 @@ class Team extends Model
     {
         return $this->hasMany(Project::class, 'team_id');
     }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'employee_team', 'team_id', 'employee_id')->withTimestamps();
+    }
+
 }
 
