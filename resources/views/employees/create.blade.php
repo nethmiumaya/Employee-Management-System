@@ -16,7 +16,11 @@
             <option value="{{ $department->department_id }}">{{ $department->department_id }}</option>
             @endforeach
         </select>
-
+        <select name="team_ids[]" multiple>
+            @foreach($teams as $team)
+            <option value="{{ $team->team_id }}">{{ $team->team_name }}</option>
+            @endforeach
+        </select>
         <select name="admin_id">
             <option value="">Select Admin</option>
             @foreach($admins as $admin)

@@ -69,6 +69,9 @@ Route::resource('projects', ProjectController::class);
 Route::resource('leaves', LeaveController::class);
 Route::resource('announcements', AnnouncementController::class);
 
+Route::get('teams/{team}/assign-employees', [TeamController::class, 'assignEmployeesForm'])->name('teams.assignEmployeesForm');
+Route::post('teams/{team}/assign-employees', [TeamController::class, 'assignEmployees'])->name('teams.assignEmployees');
+
 Route::resource('documents', DocumentController::class);
 Route::get('/admins/{admin}/edit', [AdminController::class, 'edit'])->name('admins.edit');
 

@@ -44,5 +44,10 @@ class Employee extends Model
     {
         return $this->belongsToMany(Notification::class, 'employee_notifications', 'employee_id', 'notifi_id', 'employee_id', 'notifi_id');
     }
+    public function teams()
+    {
+        return $this->belongsToMany(Team::class, 'employee_team', 'employee_id', 'team_id')->withTimestamps();
+    }
+
 }
 

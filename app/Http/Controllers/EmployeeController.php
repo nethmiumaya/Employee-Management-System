@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use Illuminate\Support\Facades\DB;
 
 class EmployeeController extends Controller
 {
@@ -19,8 +20,10 @@ class EmployeeController extends Controller
     {
         $departments = Department::all();
         $admins = Admin::all();
-        return view('employees.create', compact('departments', 'admins'));
+        $teams = \App\Models\Team::all(); // Add this line
+        return view('employees.create', compact('departments', 'admins', 'teams'));
     }
+
 
     public function store(Request $request)
     {
@@ -33,11 +36,20 @@ class EmployeeController extends Controller
             'department_id' => 'nullable',
             'admin_id' => 'nullable',
             'paid_status' => 'required',
-            'team_id' => 'nullable',
             'role' => 'required',
+            'team_ids' => 'nullable|array', // Accept multiple teams
+            'team_ids.*' => 'exists:teams,team_id',
         ]);
-        Employee::create($validated);
-        return redirect()->route('employees.index')->with('success', 'Employee created successfully.');
+
+        DB::transaction(function () use ($validated, $request) {
+            $employee = Employee::create($validated);
+
+            if ($request->has('team_ids')) {
+                $employee->teams()->sync($request->team_ids);
+            }
+        });
+
+        return redirect()->route('employees.index')->with('success', 'Employee and teams saved successfully.');
     }
 
     public function show($employee_id)
