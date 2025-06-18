@@ -5,7 +5,6 @@
     <h1>Create Employee</h1>
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
-        <input type="text" name="employee_id" placeholder="Employee ID" required>
         <input type="text" name="employee_name" placeholder="Name" required>
         <input type="text" name="employee_type" placeholder="Type" required>
         <input type="text" name="employee_status" placeholder="Status" required>

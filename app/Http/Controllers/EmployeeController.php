@@ -7,12 +7,26 @@ use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class EmployeeController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $employees = Employee::all();
+        $query = Employee::query();
+
+        if ($request->filled('employee_name')) {
+            $query->where('employee_name', 'like', '%' . $request->employee_name . '%');
+        }
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+        if ($request->filled('paid_status')) {
+            $query->where('paid_status', $request->paid_status);
+        }
+
+        $employees = $query->get();
         return view('employees.index', compact('employees'));
     }
 
@@ -25,10 +39,12 @@ class EmployeeController extends Controller
     }
 
 
+    // At the top, add:
+
+
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'employee_id' => 'required|unique:employees,employee_id',
             'employee_name' => 'required',
             'employee_type' => 'required',
             'employee_status' => 'required',
@@ -37,7 +53,7 @@ class EmployeeController extends Controller
             'admin_id' => 'nullable',
             'paid_status' => 'required',
             'role' => 'required',
-            'team_ids' => 'nullable|array', // Accept multiple teams
+            'team_ids' => 'nullable|array',
             'team_ids.*' => 'exists:teams,team_id',
         ]);
 

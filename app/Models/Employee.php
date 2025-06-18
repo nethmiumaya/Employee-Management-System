@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     protected $primaryKey = 'employee_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = [
-        'employee_id', 'employee_name', 'employee_type', 'employee_status',
+        'employee_name', 'employee_type', 'employee_status',
         'contact_no', 'department_id', 'admin_id', 'paid_status', 'team_id', 'role'
     ];
 

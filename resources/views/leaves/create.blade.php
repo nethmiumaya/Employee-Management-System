@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Create Leave</h1>
-    <form action="{{ route('leaves.store') }}" method="POST">
+    <form action="{{ route('leaves.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <input type="text" name="leave_id" value="{{ old('leave_id') }}" placeholder="Leave ID" class="form-control mb-2" required>
         <select name="employee_id" class="form-control mb-2" required>
@@ -14,7 +14,7 @@
             </option>
             @endforeach
         </select>
-        <input type="text" name="supporting_doc" value="{{ old('supporting_doc') }}" placeholder="Supporting Document" class="form-control mb-2">
+        <input type="file" name="supporting_doc" class="form-control mb-2">
         <textarea name="reason" class="form-control mb-2" required>{{ old('reason') }}</textarea>
         <input type="date" name="start_date" value="{{ old('start_date') }}" class="form-control mb-2" required>
         <input type="date" name="end_date" value="{{ old('end_date') }}" class="form-control mb-2" required>

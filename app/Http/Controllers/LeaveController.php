@@ -26,11 +26,16 @@ class LeaveController extends Controller
         $validated = $request->validate([
             'leave_id' => 'required|string|unique:leaves,leave_id',
             'employee_id' => 'required|exists:employees,employee_id',
-            'supporting_doc' => 'nullable|string',
+            'supporting_doc' => 'nullable|file',
             'reason' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
+
+        if ($request->hasFile('supporting_doc')) {
+            $path = $request->file('supporting_doc')->store('supporting_docs', 'public');
+            $validated['supporting_doc'] = $path;
+        }
 
         Leave::create($validated);
 
