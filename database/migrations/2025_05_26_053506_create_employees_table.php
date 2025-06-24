@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('employee_status');
             $table->string('contact_no');
             $table->string('department_id')->nullable();
-            $table->string('admin_id')->nullable();
+            $table->unsignedBigInteger('admin_id')->nullable();
+
             $table->string('paid_status');
             $table->string('team_id')->nullable();
             $table->string('role');

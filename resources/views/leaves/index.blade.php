@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    <form method="GET" action="{{ route('leaves.index') }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search by Employee Name" value="{{ request('search') }}">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
     <h1>Leaves</h1>
     <a href="{{ route('leaves.create') }}" class="btn btn-primary mb-3">Create Leave</a>
     <table class="table">

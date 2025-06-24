@@ -15,10 +15,16 @@ class AnnouncementController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // In index()
-    public function index()
+
+    public function index(Request $request)
     {
-        $announcements = Announcement::with(['departments', 'teams'])->get();
+        $query = Announcement::with(['departments', 'teams']);
+
+        if ($request->has('search') && $request->search !== null) {
+            $query->where('announcement_id', 'like', '%' . $request->search . '%');
+        }
+
+        $announcements = $query->get();
         return view('announcements.index', compact('announcements'));
     }
 

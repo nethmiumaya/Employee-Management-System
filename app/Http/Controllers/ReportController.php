@@ -8,9 +8,15 @@ use App\Models\SuperAdmin;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::all();
+        $query = Report::query();
+
+        if ($request->has('search_id') && $request->search_id !== null) {
+            $query->where('report_id', $request->search_id);
+        }
+
+        $reports = $query->get();
         return view('reports.index', compact('reports'));
     }
 
@@ -40,7 +46,6 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'report_id' => 'required|string|unique:reports,report_id',
             'report_name' => 'required|string|max:255',
             'super_admin_id' => 'required|string|exists:super_admins,super_admin_id',
         ]);

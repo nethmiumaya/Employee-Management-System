@@ -10,9 +10,16 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
-    public function index()
+
+    public function index(Request $request)
     {
-        $projects = Project::all();
+        $query = Project::query();
+
+        if ($request->has('search') && $request->search !== null) {
+            $query->where('project_id', 'like', '%' . $request->search . '%');
+        }
+
+        $projects = $query->get();
         return view('projects.index', compact('projects'));
     }
 

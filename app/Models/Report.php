@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Report extends Model
 {
     protected $primaryKey = 'report_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = ['report_id', 'report_name', 'super_admin_id'];
 

@@ -43,7 +43,6 @@ class AdminController extends Controller
     {
         try {
             $validated = $request->validate([
-                'admin_id' => 'required|string|unique:admins,admin_id',
                 'admin_name' => 'required|string|max:255',
             ]);
 
