@@ -9,9 +9,18 @@ use App\Models\Employee;
 class LeaveController extends Controller
 {
 
-    public function index()
+
+    public function index(Request $request)
     {
-        $leaves = Leave::with('employee')->get();
+        $query = Leave::with('employee');
+
+        if ($request->has('search') && $request->search !== null) {
+            $query->whereHas('employee', function ($q) use ($request) {
+                $q->where('employee_name', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        $leaves = $query->get();
         return view('leaves.index', compact('leaves'));
     }
 
@@ -24,13 +33,17 @@ class LeaveController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'leave_id' => 'required|string|unique:leaves,leave_id',
             'employee_id' => 'required|exists:employees,employee_id',
-            'supporting_doc' => 'nullable|string',
+            'supporting_doc' => 'nullable|file',
             'reason' => 'required|string',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after_or_equal:start_date',
         ]);
+
+        if ($request->hasFile('supporting_doc')) {
+            $path = $request->file('supporting_doc')->store('supporting_docs', 'public');
+            $validated['supporting_doc'] = $path;
+        }
 
         Leave::create($validated);
 
@@ -50,22 +63,40 @@ class LeaveController extends Controller
         return view('leaves.edit', compact('leave', 'employees'));
     }
 
-    public function update(Request $request, $leave_id)
-    {
-        $leave = Leave::findOrFail($leave_id);
+   public function update(Request $request, $leave_id)
+   {
+       $leave = Leave::findOrFail($leave_id);
 
-        $validated = $request->validate([
-            'employee_id' => 'required|exists:employees,employee_id',
-            'supporting_doc' => 'nullable|string',
-            'reason' => 'required|string',
-            'start_date' => 'required|date',
-            'end_date' => 'required|date|after_or_equal:start_date',
-        ]);
+       $validated = $request->validate([
+           'employee_id' => 'required|exists:employees,employee_id',
+           'supporting_doc' => 'nullable|file',
+           'reason' => 'required|string',
+           'start_date' => 'required|date',
+           'end_date' => 'required|date|after_or_equal:start_date',
+       ]);
 
-        $leave->update($validated);
+       // Remove old file if requested
+       if ($request->has('remove_supporting_doc') && $leave->supporting_doc) {
+           \Storage::disk('public')->delete($leave->supporting_doc);
+           $validated['supporting_doc'] = null;
+       } else {
+           $validated['supporting_doc'] = $leave->supporting_doc;
+       }
 
-        return redirect()->route('leaves.index')->with('success', 'Leave updated successfully.');
-    }
+
+       if ($request->hasFile('supporting_doc')) {
+
+           if ($leave->supporting_doc) {
+               \Storage::disk('public')->delete($leave->supporting_doc);
+           }
+           $path = $request->file('supporting_doc')->store('supporting_docs', 'public');
+           $validated['supporting_doc'] = $path;
+       }
+
+       $leave->update($validated);
+
+       return redirect()->route('leaves.index')->with('success', 'Leave updated successfully.');
+   }
 
     public function destroy($leave_id)
     {

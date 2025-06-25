@@ -1,9 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
+
+<form method="GET" action="{{ route('reports.index') }}" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="search_id" class="form-control" placeholder="Search by Report ID" value="{{ request('search_id') }}">
+        <button type="submit" class="btn btn-outline-secondary">Search</button>
+    </div>
+</form>
 <div class="container">
     <h1>Reports</h1>
     <a href="{{ route('reports.create') }}" class="btn btn-primary mb-3">Create Report</a>
+
+
     <table class="table">
         <thead>
         <tr>
@@ -13,6 +22,8 @@
         </tr>
         </thead>
         <tbody>
+
+
         @foreach($reports as $report)
         <tr>
             <td>{{ $report->report_id }}</td>

@@ -7,10 +7,9 @@
         @csrf
         @method('PUT')
         <input type="text" name="team_name" value="{{ old('team_name', $team->team_name) }}" required>
-        <select name="employee_id">
-            <option value="">Select Employee (optional)</option>
+        <select name="employee_ids[]" multiple>
             @foreach($employees as $employee)
-            <option value="{{ $employee->employee_id }}" {{ $team->employee_id == $employee->employee_id ? 'selected' : '' }}>
+            <option value="{{ $employee->employee_id }}" {{ $team->employees->contains($employee->employee_id) ? 'selected' : '' }}>
                 {{ $employee->employee_name }}
             </option>
             @endforeach

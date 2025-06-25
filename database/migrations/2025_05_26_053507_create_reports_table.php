@@ -9,17 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    // In database/migrations/2025_05_26_053507_create_reports_table.php
+
+    public function up()
     {
         Schema::create('reports', function (Blueprint $table) {
-            $table->string('report_id')->primary();
-            $table->string('report_name');
-            $table->string('super_admin_id');
-            $table->timestamps();
+            $table->bigIncrements('report_id');
+            // Change this line:
+            $table->unsignedBigInteger('super_admin_id');
+            // other columns...
 
-            $table->foreign('super_admin_id')->references('super_admin_id')->on('super_admins')->onDelete('cascade');
+            $table->foreign('super_admin_id')
+                  ->references('super_admin_id')
+                  ->on('super_admins')
+                  ->onDelete('cascade');
         });
-
     }
 
     /**

@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('documents', function (Blueprint $table) {
-            $table->string('document_id')->primary();
-            $table->string('employee_id');
+            $table->bigIncrements('document_id');
+            $table->bigInteger('employee_id')->unsigned();
             $table->string('doc_path');
             $table->string('version');
             $table->date('review_date');

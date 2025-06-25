@@ -1,7 +1,5 @@
 <?php
 
-// database/migrations/xxxx_xx_xx_create_admins_table.php
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,7 +10,7 @@ return new class extends Migration
     {
         if (!Schema::hasTable('admins')) {
             Schema::create('admins', function (Blueprint $table) {
-                $table->string('admin_id')->primary();
+                $table->id('admin_id'); // Auto-incrementing primary key, starts at 1
                 $table->string('admin_name');
                 $table->timestamps();
             });
@@ -24,4 +22,3 @@ return new class extends Migration
         Schema::dropIfExists('admins');
     }
 };
-

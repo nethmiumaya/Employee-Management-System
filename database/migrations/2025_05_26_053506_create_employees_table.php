@@ -12,13 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->string('employee_id')->primary();
+
+            $table->bigIncrements('employee_id')->primary();
             $table->string('employee_name');
             $table->string('employee_type');
             $table->string('employee_status');
             $table->string('contact_no');
-            $table->string('department_id')->nullable();
-            $table->string('admin_id')->nullable();
+           $table->unsignedBigInteger('department_id')->nullable();
+            $table->unsignedBigInteger('admin_id')->nullable();
+
             $table->string('paid_status');
             $table->string('team_id')->nullable();
             $table->string('role');

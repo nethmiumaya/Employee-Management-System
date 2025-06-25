@@ -18,7 +18,14 @@
         <tr>
             <td>{{ $team->team_id }}</td>
             <td>{{ $team->team_name }}</td>
-            <td>{{ $team->employee_id ?? 'N/A' }}</td>
+            <td>
+                @foreach($team->employees as $employee)
+                {{ $employee->employee_id }}{{ !$loop->last ? ',' : '' }}
+                @endforeach
+                @if($team->employees->isEmpty())
+                N/A
+                @endif
+            </td>
             <td>
                 <a href="{{ route('teams.edit', $team->team_id) }}" class="btn btn-warning">Edit</a>
                 <form action="{{ route('teams.destroy', $team->team_id) }}" method="POST" style="display:inline;">

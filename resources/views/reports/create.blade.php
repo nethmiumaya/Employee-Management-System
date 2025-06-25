@@ -5,10 +5,7 @@
     <h1>Create Report</h1>
     <form action="{{ route('reports.store') }}" method="POST">
         @csrf
-        <div class="mb-3">
-            <label for="report_id" class="form-label">Report ID</label>
-            <input type="text" class="form-control" id="report_id" name="report_id" required>
-        </div>
+
         <div class="mb-3">
             <label for="report_name" class="form-label">Report Name</label>
             <input type="text" class="form-control" id="report_name" name="report_name" required>

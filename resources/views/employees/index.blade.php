@@ -4,6 +4,28 @@
 <div class="container">
     <h1>Employees</h1>
     <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Create Employee</a>
+
+    <form method="GET" action="{{ route('employees.index') }}" class="mb-3">
+        <div class="row">
+            <div class="col">
+                <input type="text" name="employee_name" class="form-control" placeholder="Name" value="{{ request('employee_name') }}">
+            </div>
+            <div class="col">
+                <input type="text" name="role" class="form-control" placeholder="Role" value="{{ request('role') }}">
+            </div>
+            <div class="col">
+                <select name="paid_status" class="form-control">
+                    <option value="">Paid Status</option>
+                    <option value="paid" {{ request('paid_status') == 'paid' ? 'selected' : '' }}>Paid</option>
+                    <option value="unpaid" {{ request('paid_status') == 'unpaid' ? 'selected' : '' }}>Unpaid</option>
+                </select>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+
     <table class="table">
         <thead>
         <tr>

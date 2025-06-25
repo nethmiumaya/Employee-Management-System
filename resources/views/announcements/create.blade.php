@@ -5,7 +5,7 @@
     <h1>Create Announcement</h1>
     <form action="{{ route('announcements.store') }}" method="POST">
         @csrf
-        <input type="text" name="announcement_id" placeholder="Announcement ID" required>
+
         <textarea name="content" placeholder="Content" required></textarea>
         <input type="date" name="date" required>
         <select name="target_team_id">

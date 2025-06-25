@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+    <form method="GET" action="{{ route('announcements.index') }}" class="mb-3">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search by Announcement ID" value="{{ request('search') }}">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+        </div>
+    </form>
     <h1>Announcements</h1>
     <a href="{{ route('announcements.create') }}" class="btn btn-primary mb-3">Create Announcement</a>
     <table class="table">

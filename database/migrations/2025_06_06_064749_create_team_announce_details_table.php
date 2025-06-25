@@ -10,12 +10,12 @@ return new class extends Migration
     {
         Schema::create('team_announce_details', function (Blueprint $table) {
             $table->id();
-            $table->string('announcement_id');
-            $table->string('team_id');
+            $table->bigInteger('team_id')->unsigned(); // Match teams table
+          $table->unsignedBigInteger('announcement_id');
             $table->timestamps();
 
-            $table->foreign('announcement_id')->references('announcement_id')->on('announcements')->onDelete('cascade');
             $table->foreign('team_id')->references('team_id')->on('teams')->onDelete('cascade');
+            $table->foreign('announcement_id')->references('announcement_id')->on('announcements')->onDelete('cascade');
         });
     }
 

@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('super_admins', function (Blueprint $table) {
-            $table->string('super_admin_id')->primary();
+            $table->bigIncrements('super_admin_id');
             $table->string('super_admin_name');
             $table->string('employee_id');
             $table->timestamps();

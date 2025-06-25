@@ -5,7 +5,6 @@
     <h1>Create Employee</h1>
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
-        <input type="text" name="employee_id" placeholder="Employee ID" required>
         <input type="text" name="employee_name" placeholder="Name" required>
         <input type="text" name="employee_type" placeholder="Type" required>
         <input type="text" name="employee_status" placeholder="Status" required>
@@ -13,7 +12,7 @@
         <select name="department_id">
             <option value="">Select Department</option>
             @foreach($departments as $department)
-            <option value="{{ $department->department_id }}">{{ $department->department_id }}</option>
+            <option value="{{ $department->department_id }}">{{ $department->department_name }}</option>
             @endforeach
         </select>
         <select name="team_ids[]" multiple>

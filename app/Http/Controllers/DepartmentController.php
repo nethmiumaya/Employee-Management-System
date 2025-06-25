@@ -23,16 +23,15 @@ class DepartmentController extends Controller
         return view('departments.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'department_id' => 'required|unique:departments,department_id',
-            'department_name' => 'required|string|max:255',
-        ]);
+   public function store(Request $request)
+   {
+       $request->validate([
+           'department_name' => 'required|string|max:255',
+       ]);
 
-        Department::create($request->all());
-        return redirect()->route('departments.index')->with('success', 'Department created successfully.');
-    }
+       Department::create($request->only('department_name'));
+       return redirect()->route('departments.index')->with('success', 'Department created successfully.');
+   }
 
     public function show(Department $department)
     {

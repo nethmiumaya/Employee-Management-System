@@ -2,13 +2,7 @@
     @csrf
     <div class="container mt-4">
         <h2>Create Document</h2>
-        <div class="mb-3">
-            <label for="document_id" class="form-label">Document ID</label>
-            <input type="text" class="form-control @error('document_id') is-invalid @enderror" id="document_id" name="document_id" value="{{ old('document_id') }}" required>
-            @error('document_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+
         <div class="mb-3">
             <label for="employee_id" class="form-label">Employee</label>
             <select class="form-select @error('employee_id') is-invalid @enderror" id="employee_id" name="employee_id" required>

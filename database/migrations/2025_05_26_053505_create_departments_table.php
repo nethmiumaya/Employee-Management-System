@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->string('department_id')->primary();
+            $table->bigIncrements('department_id'); // auto-increment primary key
             $table->string('department_name');
             $table->timestamps();
         });

@@ -18,17 +18,16 @@ class SuperAdminController extends Controller
         return view('super_admin.create');
     }
 
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'super_admin_id' => 'required|string|unique:super_admins,super_admin_id',
-            'super_admin_name' => 'required|string|max:255',
-        ]);
+   public function store(Request $request)
+   {
+       $validated = $request->validate([
+           'super_admin_name' => 'required|string|max:255',
+       ]);
 
-        SuperAdmin::create($validated);
+       SuperAdmin::create($validated);
 
-        return redirect()->route('super_admins.index')->with('success', 'Super Admin created successfully!');
-    }
+       return redirect()->route('super_admins.index')->with('success', 'Super Admin created successfully!');
+   }
 
     public function edit(SuperAdmin $superAdmin)
     {
