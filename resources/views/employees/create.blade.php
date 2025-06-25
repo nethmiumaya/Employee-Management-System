@@ -12,7 +12,7 @@
         <select name="department_id">
             <option value="">Select Department</option>
             @foreach($departments as $department)
-            <option value="{{ $department->department_id }}">{{ $department->department_id }}</option>
+            <option value="{{ $department->department_id }}">{{ $department->department_name }}</option>
             @endforeach
         </select>
         <select name="team_ids[]" multiple>

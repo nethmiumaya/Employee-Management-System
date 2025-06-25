@@ -33,13 +33,12 @@ class TeamController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'team_id' => 'required|unique:teams,team_id',
             'team_name' => 'required|string|max:255',
             'employee_ids' => 'nullable|array',
             'employee_ids.*' => 'exists:employees,employee_id',
         ]);
 
-        $team = Team::create($request->only(['team_id', 'team_name']));
+        $team = Team::create($request->only(['team_name']));
 
         if ($request->has('employee_ids')) {
             $team->employees()->sync($request->employee_ids);

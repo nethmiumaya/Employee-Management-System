@@ -33,7 +33,6 @@ class LeaveController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'leave_id' => 'required|string|unique:leaves,leave_id',
             'employee_id' => 'required|exists:employees,employee_id',
             'supporting_doc' => 'nullable|file',
             'reason' => 'required|string',

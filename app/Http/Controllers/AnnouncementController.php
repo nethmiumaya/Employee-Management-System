@@ -54,18 +54,16 @@ class AnnouncementController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'announcement_id' => 'required|unique:announcements,announcement_id',
             'content' => 'required',
             'date' => 'required|date',
             'department_ids' => 'required|array',
             'department_ids.*' => 'exists:departments,department_id',
-            'employee_ids' => 'required|array', // Add this line
-            'employee_ids.*' => 'exists:employees,employee_id', // Add this line
+            'employee_ids' => 'required|array',
+            'employee_ids.*' => 'exists:employees,employee_id',
         ]);
 
         DB::transaction(function () use ($request) {
             $announcement = Announcement::create([
-                'announcement_id' => $request->input('announcement_id'),
                 'content' => $request->input('content'),
                 'date' => $request->input('date'),
             ]);

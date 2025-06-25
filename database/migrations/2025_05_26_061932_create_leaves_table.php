@@ -9,7 +9,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('leaves', function (Blueprint $table) {
-            $table->string('leave_id')->primary();
+            $table->bigIncrements('leave_id');
             $table->bigInteger('employee_id')->unsigned(); // Fix: match employees table
             $table->string('supporting_doc')->nullable();
             $table->text('reason');

@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Announcement extends Model
 {
     protected $primaryKey = 'announcement_id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    public $incrementing = true;
+    protected $keyType = 'int';
 
     protected $fillable = ['announcement_id', 'content', 'date', 'target_team_id', 'department_id'];
 

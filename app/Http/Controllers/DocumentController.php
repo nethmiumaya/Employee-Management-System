@@ -23,26 +23,26 @@ class DocumentController extends Controller
     }
 
    // public function store(Request $request)
-    public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'document_id' => 'required|unique:documents,document_id',
-            'employee_id' => 'required|exists:employees,employee_id',
-            'doc_path' => 'required|file',
-            'version' => 'required|string',
-            'review_date' => 'required|date',
-            'access_permission' => 'required|string',
-            'project_id' => 'nullable|exists:projects,project_id',
-        ]);
+   public function store(Request $request)
+   {
+       $validated = $request->validate([
+           'employee_id' => 'required|exists:employees,employee_id',
+           'doc_path' => 'required|file',
+           'version' => 'required|string',
+           'review_date' => 'required|date',
+           'access_permission' => 'required|string',
+           'project_id' => 'nullable|exists:projects,project_id',
+       ]);
 
-        if ($request->hasFile('doc_path')) {
-            $path = $request->file('doc_path')->store('documents', 'public');
-            $validated['doc_path'] = $path;
-        }
+       if ($request->hasFile('doc_path')) {
+           $path = $request->file('doc_path')->store('documents', 'public');
+           $validated['doc_path'] = $path;
+       }
 
-        Document::create($validated);
-        return redirect()->route('documents.index')->with('success', 'Document created successfully.');
-    }
+       Document::create($validated);
+       return redirect()->route('documents.index')->with('success', 'Document created successfully.');
+   }
+
     public function edit($document_id)
     {
         $document = Document::findOrFail($document_id);

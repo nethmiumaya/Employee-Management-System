@@ -5,8 +5,7 @@
     <h1>Create Leave</h1>
     <form action="{{ route('leaves.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" name="leave_id" value="{{ old('leave_id') }}" placeholder="Leave ID" class="form-control mb-2" required>
-        <select name="employee_id" class="form-control mb-2" required>
+               <select name="employee_id" class="form-control mb-2" required>
             <option value="">Select Employee</option>
             @foreach($employees as $employee)
             <option value="{{ $employee->employee_id }}" {{ old('employee_id') == $employee->employee_id ? 'selected' : '' }}>
