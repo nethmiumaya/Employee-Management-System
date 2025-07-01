@@ -1243,7 +1243,7 @@
 
                 <div class="sidebar-menu-section">
                     <div class="sidebar-menu-title">Management</div>
-                    <a href="#" class="sidebar-menu-item">
+                    <a href="{{ route('projects.index') }}" class="sidebar-menu-item">
                         <i class="fas fa-project-diagram"></i>
                         <span>Projects</span>
                     </a>
