@@ -1,23 +1,11 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <title>Employee Management System</title>-->
-<!---->
-<!--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="container mt-4">-->
-<!--    @yield('content')-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Employee Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    @stack('styles')
 </head>
 <body>
 <div class="container mt-4">
@@ -36,10 +24,10 @@
             </li>
         </ul>
     </nav>
+
     @yield('content')
 </div>
 
-<!-- Notification JS -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const bell = document.getElementById('notificationBell');
@@ -58,10 +46,10 @@
                     } else {
                         data.notifications.forEach(n => {
                             list.innerHTML += `<div class="border-bottom py-2">
-                            <div><strong>${n.type}</strong> - ${n.delivery_channel}</div>
-                            <div>${n.message}</div>
-                            <div class="small text-muted">${n.timestamp}</div>
-                        </div>`;
+                                <div><strong>${n.type}</strong> - ${n.delivery_channel}</div>
+                                <div>${n.message}</div>
+                                <div class="small text-muted">${n.timestamp}</div>
+                            </div>`;
                         });
                     }
                     count.textContent = data.notifications.length > 0 ? data.notifications.length : '';
@@ -69,7 +57,6 @@
                 });
         });
 
-        // Hide dropdown when clicking outside
         document.addEventListener('click', function (e) {
             if (!bell.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.classList.remove('show');
@@ -77,5 +64,6 @@
         });
     });
 </script>
+@stack('scripts')
 </body>
 </html>

@@ -14,12 +14,11 @@ use App\Http\Controllers\TeamController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\DocumentController;
 
-// Guest route - Welcome page
+
 Route::get('/', function () {
     return view('dashboard');
 })->middleware('guest')->name('welcome');
 
-// Authentication required routes
 Route::middleware('auth')->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.store');
@@ -29,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/super_admin/dashboard', function () {
         return view('super_admin.dashboard');
     })->name('super_admin.dashboard');
+
+    Route::get('/admin/employees', [EmployeeController::class, 'index'])->name('admin.employees');
+    Route::get('/admin/projects', [ProjectController::class, 'index'])->name('admin.projects');
+    Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
@@ -40,7 +43,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
-    // Redirect authenticated users to their respective dashboards
+
     Route::get('/dashboard', function () {
         $user = auth()->check() ? auth()->user() : null;
         if ($user && $user->role === 'admin') {
