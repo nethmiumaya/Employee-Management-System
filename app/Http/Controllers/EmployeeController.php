@@ -27,6 +27,12 @@ class EmployeeController extends Controller
         }
 
         $employees = $query->get();
+
+        if ($request->ajax()) {
+            return view('employees.index', compact('employees'))->render();
+        }
+
+        // For non-AJAX, redirect or show full page as needed
         return view('employees.index', compact('employees'));
     }
 

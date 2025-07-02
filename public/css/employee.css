@@ -1,0 +1,126 @@
+.employee-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 32px;
+    font-family: 'Inter', Arial, sans-serif;
+}
+.employee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+.employee-search-form {
+    display: flex;
+    gap: 12px;
+}
+.employee-search-input {
+    padding: 10px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    width: 220px;
+}
+.employee-search-btn {
+    background: #f97316;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.employee-search-btn:hover {
+    background: #ea580c;
+}
+.employee-add-btn {
+    background: #10b981;
+    color: #fff;
+    border-radius: 8px;
+    padding: 10px 24px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+.employee-add-btn:hover {
+    background: #059669;
+}
+.employee-table-wrapper {
+    overflow-x: auto;
+}
+.employee-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 18px;
+}
+.employee-table th, .employee-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid #f3f4f6;
+}
+.employee-table th {
+    background: #f9fafb;
+    font-size: 1rem;
+    color: #374151;
+    font-weight: 600;
+}
+.employee-row-even {
+    background: #fff;
+}
+.employee-row-odd {
+    background: #fafafa;
+}
+.employee-actions {
+    display: flex;
+    gap: 8px;
+}
+.employee-action-btn {
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+}
+.employee-view-btn {
+    background: #e0f2fe;
+    color: #0284c7;
+}
+.employee-view-btn:hover {
+    background: #bae6fd;
+}
+.employee-edit-btn {
+    background: #fef9c3;
+    color: #f59e42;
+}
+.employee-edit-btn:hover {
+    background: #fde68a;
+}
+.employee-delete-btn {
+    background: #fee2e2;
+    color: #dc2626;
+}
+.employee-delete-btn:hover {
+    background: #fecaca;
+}
+.employee-empty-row {
+    text-align: center;
+    color: #9ca3af;
+    padding: 32px 0;
+    font-size: 1.1rem;
+}
+.employee-pagination {
+    margin: 24px 0 0 0;
+    text-align: center;
+}
+.employee-footer-info {
+    margin-top: 18px;
+    color: #6b7280;
+    font-size: 0.98rem;
+    text-align: center;
+}
