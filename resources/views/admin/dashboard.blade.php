@@ -49,9 +49,10 @@
 
                 <div class="sidebar-menu-section">
                     <div class="sidebar-menu-title">Management</div>
-                    <a href="{{ route('projects.index') }}" class="sidebar-menu-item">
-                        <i class="fas fa-project-diagram"></i>
+                    <a href="{{ route('projects.index') }}" class="sidebar-menu-item" id="loadProjects">
+                        <i class="fas fa-briefcase"></i>
                         <span>Projects</span>
+                        <span class="badge">{{ $totalProjects ?? 0 }}</span>
                     </a>
                     <a href="{{ route('reports.index') }}" class="sidebar-menu-item">
                         <i class="fas fa-chart-bar"></i>
@@ -837,6 +838,18 @@
     </script>
     <script>
         document.getElementById('loadEmployees').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch(this.href, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('dashboardContent').innerHTML = html;
+                });
+        });
+    </script>
+    <script>
+        document.getElementById('loadProjects').addEventListener('click', function(e) {
             e.preventDefault();
             fetch(this.href, {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }

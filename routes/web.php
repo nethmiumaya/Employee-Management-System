@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/projects', [ProjectController::class, 'index'])->name('admin.projects');
     Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');

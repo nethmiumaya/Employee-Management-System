@@ -36,6 +36,10 @@
         <ul class="nav flex-column p-3">
             <li class="nav-item"><a class="nav-link text-white" href="{{ route('dashboard') }}">Dashboard</a></li>
             <li class="nav-item"><a class="nav-link text-white" href="{{ route('employees.index') }}">Employees</a></li>
+            <!-- Add this inside the <ul class="nav flex-column p-3"> in the sidebar -->
+            <li class="nav-item">
+                <a class="nav-link text-white" href="{{ route('projects.index') }}">Projects</a>
+            </li>
             <!-- Add more sidebar links as needed -->
         </ul>
     </div>

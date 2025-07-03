@@ -6,7 +6,7 @@
     <title>Reset Password - HRMS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/reset-password.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/auth/reset-password.css') }}">
 </head>
 <body class="login-container">
     <div class="login-split">
