@@ -26,7 +26,14 @@ class EmployeeController extends Controller
             $query->where('paid_status', $request->paid_status);
         }
 
-        $employees = $query->get();
+        $employees = $query->orderBy('employee_name')->paginate(10);
+
+        $employees->appends($request->all());
+
+        if ($request->ajax()) {
+            return view('employees.index', compact('employees'))->render();
+        }
+
         return view('employees.index', compact('employees'));
     }
 
