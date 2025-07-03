@@ -12,11 +12,8 @@ class DepartmentController extends Controller
         $this->middleware('auth')->only(['create', 'store', 'edit', 'destroy']);
     }
 
-    public function index()
-    {
-        $departments = Department::all();
-        return view('components.department', compact('departments'));
-    }
+
+
 
     public function create()
     {

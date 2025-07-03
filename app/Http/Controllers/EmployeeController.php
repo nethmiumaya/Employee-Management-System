@@ -26,10 +26,8 @@ class EmployeeController extends Controller
             $query->where('paid_status', $request->paid_status);
         }
 
-        // Use pagination instead of get()
         $employees = $query->orderBy('employee_name')->paginate(10);
 
-        // Keep query params for pagination links
         $employees->appends($request->all());
 
         if ($request->ajax()) {

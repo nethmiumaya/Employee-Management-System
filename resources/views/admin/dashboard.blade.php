@@ -41,9 +41,10 @@
                         <span>Employees</span>
                         <span class="badge">{{ $totalEmployees ?? 156 }}</span>
                     </a>
-                    <a href="{{ route('departments.index') }}" class="sidebar-menu-item">
+                    <a href="{{ route('departments.index') }}" class="sidebar-menu-item" id="loadDepartments">
                         <i class="fas fa-building"></i>
                         <span>Departments</span>
+                        <span class="badge">{{ $totalDepartments ?? 12 }}</span>
                     </a>
                 </div>
 
@@ -850,6 +851,18 @@
     </script>
     <script>
         document.getElementById('loadProjects').addEventListener('click', function(e) {
+            e.preventDefault();
+            fetch(this.href, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById('dashboardContent').innerHTML = html;
+                });
+        });
+    </script>
+    <script>
+        document.getElementById('loadDepartments').addEventListener('click', function(e) {
             e.preventDefault();
             fetch(this.href, {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
