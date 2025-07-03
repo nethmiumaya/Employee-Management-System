@@ -12,8 +12,19 @@ class DepartmentController extends Controller
         $this->middleware('auth')->only(['create', 'store', 'edit', 'destroy']);
     }
 
+    public function index(Request $request)
+    {
+        $query = Department::query();
 
+        if ($request->filled('department_name')) {
+            $query->where('department_name', 'like', '%' . $request->department_name . '%');
+        }
 
+        $departments = $query->orderBy('department_name')->paginate(10);
+        $departments->appends($request->all());
+
+        return view('departments.index', compact('departments'));
+    }
 
     public function create()
     {

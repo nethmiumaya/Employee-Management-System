@@ -34,7 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/reports', [ReportController::class, 'index'])->name('admin.reports');
 
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
-    Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
     Route::get('/employees/{employee}', [EmployeeController::class, 'show'])->name('employees.show');
@@ -61,6 +60,8 @@ Route::middleware('auth')->group(function () {
 Route::get('/employees/{employee}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
 Route::put('/employees/{employee}', [EmployeeController::class, 'update'])->name('employees.update');
 
+
+Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
 Route::post('/notifications', [NotificationController::class, 'store'])->name('notifications.store');
 Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
 
