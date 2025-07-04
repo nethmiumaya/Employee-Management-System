@@ -15,12 +15,20 @@ class ProjectController extends Controller
     {
         $query = Project::query();
 
-        if ($request->has('search') && $request->search !== null) {
-            $query->where('project_id', 'like', '%' . $request->search . '%');
+        if ($request->filled('project_name')) {
+            $query->where('project_name', 'like', '%' . $request->project_name . '%');
+        }
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+        if ($request->filled('department')) {
+            $query->where('department_id', $request->department);
         }
 
-        $projects = $query->get();
-        return view('projects.index', compact('projects'));
+        $projects = $query->with('department')->paginate(10);
+        $departments = \App\Models\Department::all();
+
+        return view('projects.index', compact('projects', 'departments'));
     }
 
     public function create()
